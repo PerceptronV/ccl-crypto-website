@@ -52,6 +52,23 @@
                   <span class="input-group-text">\(q\)</span>
                   <input id="q" type="number" min="0" max="1000" class="form-control" placeholder="prime q">
                 </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" style="color: blue;">\(n=pq\)</span>
+                  <input id="n" type="number" class="form-control" placeholder="p×q" disabled>
+                  <span class="input-group-text" style="color: green;">\(\phi(n)\)</span>
+                  <input id="tot" type="number" class="form-control" placeholder="(p-1)×(q-1)" disabled>
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" style="color: blue;">\(e\)</span>
+                  <input id="e" type="number" min="1" max="1000" class="form-control" placeholder="gcd(e,n)=1">
+                  <span class="input-group-text" style="color: green;">\(d \equiv e^{-1}\;\) (mod ϕ(n))</span>
+                  <input id="d" type="number" class="form-control" placeholder="inverse of e" disabled>
+                </div>
+              </div>
+              <div>
+                <a style="color: blue; margin-right: 10px;">\(n\) and \(e\): public key</a>
+                <a style="color: green; margin-left: 10px;">\(\phi (n)\) and \(d\): private key</a><br/><br/>
+                Send public keys to King Byron now.
               </div>
             </div>
           </div>
@@ -65,7 +82,23 @@
           </div>
           <div class="card-body">
             <h5 class="card-title">King Byron</h5>
-
+            <div class="input-group mb-3">
+              <span class="input-group-text">\(n\)</span>
+              <input id="bn" type="number" class="form-control" placeholder="n">
+              <span class="input-group-text">\(e\)</span>
+              <input id="be" type="number" class="form-control" placeholder="e">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">\(m\)</span>
+              <input id="bm" type="number" class="form-control" placeholder="message: 0≤m<n">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">\(c \equiv m^e\)</span>
+              <input id="bc" type="number" class="form-control" placeholder="encrypted message" disabled>
+            </div>
+            <div>
+              Send \(c\) back to King Alastair now.
+            </div>
           </div>
         </div>
       </div>
@@ -73,8 +106,9 @@
     </div>
   </div>
 
-  <button type="button" class="btn btn-light btn-lg" style="margin-bottom: 1rem;">Run Your Example</button>
+  <button type="button" class="btn btn-light btn-lg" style="margin-bottom: 1rem;" onclick="back()">Go Back</button>
 
+  <!--
   <div id="sandbox" class="container terminal hiddenscrollbar">
     <div id="sandout" class="container h5">
       <div class="terminal-line terminal-break" style="color: green; text-align: center;">
@@ -92,8 +126,8 @@
         <option value="/slides">
       </datalist>
     </div>
-
   </div>
+  -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
@@ -116,6 +150,35 @@
 
     _back = ()=>
       print(`You can go back to main terminal <a href="../index.html">here</a>.`, html=true);
+
+    back = ()=> window.location.href = "../index.html";
+
+    function notEmpty(id) {
+      return $("#" + id).val() != "";
+    }
+
+    function getVal(id) {
+      return parseInt($("#" + id).val());
+    }
+
+    function setVal(id, val) {
+      $("#" + id).val(val);
+    }
+
+    function updateRSA() {
+      if (notEmpty('p') && notEmpty('q')) {
+        setVal('n', getVal('p') * getVal('q'));
+        setVal('tot', (getVal('p')-1) * (getVal('q')-1));
+
+        if (notEmpty('e')) setVal('d', inv(getVal('e'), getVal('tot'), false));
+      }
+
+      if (notEmpty('bn') && notEmpty('be') && notEmpty('bm')) {
+        setVal('bc', mod(getVal('bm') ** getVal('be'), getVal('bn')));
+      }
+    }
+
+    setInterval(updateRSA, 500);
   </script>
 
 </body>

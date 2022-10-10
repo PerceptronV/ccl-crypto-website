@@ -112,3 +112,11 @@ function inv(a, m, showSteps = true) {
     return ret;
   }
 }
+
+function totient(n) {
+  var ret = 0;
+  for (var i=1; i<n; i++) {
+    if (gcd(i, n, null, false) == 1) ret += 1;
+  }
+  return ret;
+}
