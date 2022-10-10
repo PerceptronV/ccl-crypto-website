@@ -1,8 +1,9 @@
 _about = ()=>
       print(`Welcome to Σ Terminal, brought to you with ♥ from 
-      <a href="https://teamenigma.ml">Team Enigma</a>.<br/>
-      We hope you'll find this a useful resource in conjunction with the talk.
-      Type <code>/help</code> to learn more about how to use Sigma Terminal.`, html=true, color="white");
+      <a href="https://teamenigma.ml">Team Enigma</a>, Harrow School.<br/>
+      We hope you'll find this a useful resource in conjunction with the Cross-Curricular Lecture.<br/>
+      Type <code>/help</code> to learn more about how to use Sigma Terminal.<br/>
+      You can check out our <a href="https://github.com/PerceptronV/sigma_terminal">source code here</a>.`, html=true, color="white");
 
 _examples = ()=>{
   runTerminal(`// OK. Let's see some examples of using Sigma Terminal.`);
