@@ -70,6 +70,15 @@
                 <a style="color: green; margin-left: 10px;">\(\phi (n)\) and \(d\): private key</a><br/><br/>
                 Send public keys to King Byron now.
               </div>
+              <hr>
+              <div class="input-group mb-3">
+                <span class="input-group-text">\(c\)</span>
+                <input id="c" type="number" class="form-control" placeholder="encrypted message">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" style="color: purple;">\(m'=c^d\;\) (mod n)</span>
+                <input id="decrypt" type="number" class="form-control" placeholder="decrypted message" disabled>
+              </div>
             </div>
           </div>
         </div>
@@ -93,7 +102,7 @@
               <input id="bm" type="number" class="form-control" placeholder="message: 0≤m<n">
             </div>
             <div class="input-group mb-3">
-              <span class="input-group-text">\(c \equiv m^e\)</span>
+              <span class="input-group-text">\(c \equiv m^e\;\) (mod n)</span>
               <input id="bc" type="number" class="form-control" placeholder="encrypted message" disabled>
             </div>
             <div>
@@ -174,7 +183,11 @@
       }
 
       if (notEmpty('bn') && notEmpty('be') && notEmpty('bm')) {
-        setVal('bc', mod(getVal('bm') ** getVal('be'), getVal('bn')));
+        setVal('bc', (BigInt(getVal('bm')) ** BigInt(getVal('be'))) % BigInt(getVal('bn')));
+      }
+
+      if (notEmpty('c') && notEmpty('d') && notEmpty('n')) {
+        setVal('decrypt', (BigInt(getVal('c')) ** BigInt(getVal('d'))) % BigInt(getVal('n')));
       }
     }
 
