@@ -46,14 +46,16 @@
     crossorigin="anonymous"></script>
   
   <script tag="constants">
-    var _DEVICE = "sandout";
+    const _DEVICE = "sandout";
+    const _KEYBOARD = "sandinp";
   </script>
 
   <script src="terminator_js/terminator.js"></script>
   <script src="ntheory.js"></script>
 
   <script tag="control">
-    initTerminal("sandinp");
+    initTerminal();
+    
     _rsa = ()=>
       print(`You can access the RSA interative demo page <a href="./rsa/index.html">here</a>.`, html=true);
   </script>

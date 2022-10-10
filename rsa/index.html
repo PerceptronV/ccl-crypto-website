@@ -101,7 +101,8 @@
   
   <script tag="constants">
     const _MAXPRIME = 1e+6;
-    var _DEVICE = "sandout";
+    const _DEVICE = "sandout";
+    const _KEYBOARD = "sandinp";
 
     $("#p").attr({ "max": _MAXPRIME }); $("#q").attr({ "max": _MAXPRIME });
   </script>
@@ -111,7 +112,7 @@
 
   <script tag="control">
     const _PRIMES = primesUpto(_MAXPRIME);
-    initTerminal("sandinp");
+    initTerminal();
 
     _back = ()=>
       print(`You can go back to main terminal <a href="../index.html">here</a>.`, html=true);

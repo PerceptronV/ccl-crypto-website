@@ -3,6 +3,13 @@ _about = ()=>
       <a href="https://teamenigma.ml">Team Enigma</a>.<br/>
       We hope you'll find this a useful resource in conjunction with the talk.
       Type <code>/help</code> to learn more about how to use Sigma Terminal.`, html=true, color="white");
+
+_examples = ()=>{
+  runTerminal(`// OK. Let's see some examples of using Sigma Terminal.`);
+  runTerminal(`// This Terminal runs everything JavaScript, plus some additional functions that Vincent has written up.`);
+  runTerminal(`a = 18 // You can define variables`);
+  runTerminal(`a * 2 // and operate on them`);
+}
     
 _help = ()=>
   print(`
@@ -42,12 +49,12 @@ function print(str, html=false, color="inherit", breakline=false) {
   }
 }
 
-function runTerminal(script, input_id) {
+function runTerminal(script) {
   script = script.trim();
   if (script.length != 0) {
     print("↩ " + script, html=false, color="green");
 
-    if (script[0] == "/") {
+    if (script[0] == "/" && script[1] != "/") {
       var cmd = "_" + script.slice(1) + "()"; // Convert, say, /about to _about()
       try {eval(cmd);}
       catch {print(script + " is not a valid `/` command", html=false, color="red");}
@@ -58,17 +65,17 @@ function runTerminal(script, input_id) {
 
     print("", html=false, color="inherit", breakline=true);
 
-    document.getElementById(input_id).scrollIntoView();
+    document.getElementById(_KEYBOARD).scrollIntoView();
     
   }
 }
 
-function initTerminal(input_id) {
-  $("#"+input_id).keydown(function(event) {
+function initTerminal() {
+  $("#"+_KEYBOARD).keydown(function(event) {
     if (event.which==13) {
-      var val = $("#"+input_id).val();
-      $("#"+input_id).val("");
-      runTerminal(val, input_id);
+      var val = $("#"+_KEYBOARD).val();
+      $("#"+_KEYBOARD).val("");
+      runTerminal(val, _KEYBOARD);
     };
   });
 }
