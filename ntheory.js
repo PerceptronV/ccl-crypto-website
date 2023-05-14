@@ -25,7 +25,7 @@ function mod(a, m) {
   return ((a % m) + m) % m; // this is needed to handle negative numbers
 }
 
-function gcd(a, b, history = null, showSteps = true) {
+function gcd(a, b, showSteps = true, history = null) {
   // Euclidean algorithm
   // For algorithm, refer to https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
 
@@ -38,10 +38,10 @@ function gcd(a, b, history = null, showSteps = true) {
 
   if (history != null) {
     history.push(hist_add);
-    return gcd(b % a, a, history, showSteps);
+    return gcd(b % a, a, showSteps, history);
   }
 
-  return gcd(b % a, a, null, showSteps);
+  return gcd(b % a, a, showSteps, null);
 }
 
 function viewHistory(hist, color="grey") {
@@ -63,7 +63,7 @@ function extEuc(a, b, showSteps = true) {
   }
 
   var hist = [];
-  var g = gcd(a, b, hist, false);
+  var g = gcd(a, b, false, hist);
   if (showSteps) {
     viewHistory(hist, "grey");
     print("GCD = " + g, html=false, color="grey");
@@ -114,9 +114,11 @@ function inv(a, m, showSteps = true) {
 }
 
 function totient(n) {
+  if (n == 1) return 1;
+  if (!(n > 1 && Number.isInteger(n))) return null;
   var ret = 0;
   for (var i=1; i<n; i++) {
-    if (gcd(i, n, null, false) == 1) ret += 1;
+    if (gcd(i, n, false, null) == 1) ret += 1;
   }
   return ret;
 }

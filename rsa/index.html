@@ -60,8 +60,8 @@
                 </div>
                 <div class="input-group mb-3">
                   <span class="input-group-text" style="color: blue;">\(e\)</span>
-                  <input id="e" type="number" min="1" max="1000" class="form-control" placeholder="gcd(e,n)=1">
-                  <span class="input-group-text" style="color: green;">\(d \equiv e^{-1}\;\) (mod ϕ(n))</span>
+                  <input id="e" type="number" min="1" max="1000" class="form-control" placeholder="gcd(e,ϕ(n))=1">
+                  <span class="input-group-text" style="color: green;">\(d \equiv e^{-1}\; (\text{mod} \; \phi (n))\)</span>
                   <input id="d" type="number" class="form-control" placeholder="inverse of e" disabled>
                 </div>
               </div>
@@ -76,7 +76,7 @@
                 <input id="c" type="number" class="form-control" placeholder="encrypted message">
               </div>
               <div class="input-group mb-3">
-                <span class="input-group-text" style="color: purple;">\(m'=c^d\;\) (mod n)</span>
+                <span class="input-group-text" style="color: purple;">\(m'=c^d\; (\text{mod} \; n)\)</span>
                 <input id="decrypt" type="number" class="form-control" placeholder="decrypted message" disabled>
               </div>
             </div>
@@ -102,7 +102,7 @@
               <input id="bm" type="number" class="form-control" placeholder="message: 0≤m<n">
             </div>
             <div class="input-group mb-3">
-              <span class="input-group-text">\(c \equiv m^e\;\) (mod n)</span>
+              <span class="input-group-text">\(c \equiv m^e\; (\text{mod} \; n)\)</span>
               <input id="bc" type="number" class="form-control" placeholder="encrypted message" disabled>
             </div>
             <div>
